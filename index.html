@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>私のポートフォリオ</title>
+  <!-- Bootstrap CDN -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      background: #f8f9fa;
+    }
+    .profile-pic {
+      max-width: 150px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #777;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container text-center py-5">
+    <img
+      src="https://placehold.co/150x150/png"
+      alt="プロフィール写真"
+      class="profile-pic"
+    />
+    <h1>こんにちは、私はZHANGです</h1>
+    <p class="lead">AWSを勉強中</p>
+
+    <div class="mb-4">
+      <a
+        href="mailto:zsd9272@gmail.com"
+        class="btn btn-primary me-2"
+        >メールで連絡</a
+      >
+      <a href="tel:+818063727114" class="btn btn-success me-2"
+        >電話する</a
+      >
+    </div>
+
+    <div class="mb-4">
+      <a
+        href="https://github.com/zsd9272"
+        target="_blank"
+        class="btn btn-dark me-2"
+        >GitHub</a
+      >
+      <a
+        href="https://linkedin.com/in/your-linkedin"
+        target="_blank"
+        class="btn btn-info text-white"
+        >LinkedIn</a
+      >
+    </div>
+
+    <!-- 联系表单按钮，后续可连接Lambda -->
+    <button
+      class="btn btn-outline-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#contactModal"
+    >
+      お問い合わせフォーム
+    </button>
+  </div>
+
+  <!-- 联系表单 Modal -->
+  <div
+    class="modal fade"
+    id="contactModal"
+    tabindex="-1"
+    aria-labelledby="contactModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="contactForm">
+          <div class="modal-header">
+            <h5 class="modal-title" id="contactModalLabel">お問い合わせフォーム</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="閉じる"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="name" class="form-label">お名前</label>
+              <input type="text" class="form-control" id="name" required />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">メールアドレス</label>
+              <input type="email" class="form-control" id="email" required />
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">メッセージ</label>
+              <textarea class="form-control" id="message" rows="4" required></textarea>
+            </div>
+            <div id="formAlert" class="text-danger d-none">送信エラーが発生しました。</div>
+            <div id="formSuccess" class="text-success d-none">送信が成功しました！</div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">送信</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              閉じる
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (Popper + Bootstrap) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  ></script>
+
+  <!-- 表单提交示例脚本 -->
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // 这里先简单演示前端校验和提交
+      // 后续可连接 AWS Lambda + API Gateway
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const alertEl = document.getElementById('formAlert');
+      const successEl = document.getElementById('formSuccess');
+
+      alertEl.classList.add('d-none');
+      successEl.classList.add('d-none');
+
+      if (!name || !email || !message) {
+        alertEl.textContent = 'すべての項目を入力してください。';
+        alertEl.classList.remove('d-none');
+        return;
+      }
+
+      // 模拟发送成功
+      successEl.classList.remove('d-none');
+
+      // 清空表单
+      this.reset();
+    });
+  </script>
+</body>
+</html>
